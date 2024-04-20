@@ -25,7 +25,7 @@ const ClientsTable: React.FC<{ clients: Client[] }> = ({ clients }) => {
             setEditedClients(updatedClients);
 
             const { AccountNumber } = updatedClients[index];
-            await axios.post('http://localhost:5000/clients', { AccountNumber, Status: newStatus });
+            await axios.post('/clients', { AccountNumber, Status: newStatus });
         } catch (error) {
             console.error('Ошибка при отправке запроса на обновление статуса:', error);
         }

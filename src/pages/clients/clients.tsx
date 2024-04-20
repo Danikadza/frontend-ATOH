@@ -23,7 +23,7 @@ const ClientsPage: React.FC = () => {
 
     const getClients = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/clients/${user}`);
+            const response = await axios.get(`/clients/${user}`);
             setClients(response.data);
         } catch (error) {
             console.error('Ошибка при отправке запроса:', error);
