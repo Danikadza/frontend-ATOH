@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import LoginPage from './pages/login/login';
 import ClientsPage from './pages/clients/clients';
 import ErrorPage from './pages/error/error';
 import { ChakraProvider } from '@chakra-ui/react'
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <LoginPage />,
