@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Button,
     Input,
@@ -21,7 +21,9 @@ const LoginPage: React.FC = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-          navigate("/clients")
+            const token = localStorage.getItem('token')
+            axios.defaults.headers.common['Authorization'] =`Bearer ${token}`;
+            navigate("/clients")
         } else {
             navigate("/")
         }
@@ -36,6 +38,8 @@ const LoginPage: React.FC = () => {
             const data = response.data;
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', data.FullName);
+            const token = localStorage.getItem('token')
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             return navigate("/clients")
         } catch (error) {
             console.error('Ошибка при отправке запроса:', error);
@@ -57,7 +61,7 @@ const LoginPage: React.FC = () => {
             >
                 <FormControl>
                     <FormLabel>Login</FormLabel>
-                    <Input type='text' value={login} onChange={(e) => setLogin(e.target.value)}/>
+                    <Input type='text' value={login} onChange={(e) => setLogin(e.target.value)} />
                 </FormControl>
                 <FormControl>
                     <FormLabel>Password</FormLabel>

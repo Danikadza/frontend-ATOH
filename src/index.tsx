@@ -7,6 +7,7 @@ import env from './config/env'
 
 axios.defaults.baseURL = env.BASE_URL;
 
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

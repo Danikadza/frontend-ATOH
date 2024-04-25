@@ -42,6 +42,8 @@ const ClientsPage: React.FC = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
+            const token = localStorage.getItem('token')
+            axios.defaults.headers.common['Authorization'] = `${token}`;
             fetchData()
         } else {
             navigate("/")
@@ -62,7 +64,7 @@ const ClientsPage: React.FC = () => {
             {clients.length > 0 ? (
                 <ClientsTable clients={clients} />
             ) : (
-                <p>Загрузка...</p> 
+                <p>Загрузка...</p>
             )}
         </>
     );

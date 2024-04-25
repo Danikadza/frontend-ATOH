@@ -1,13 +1,7 @@
 import React from 'react';
 import { useRouteError } from 'react-router-dom';
 import {
-    Button,
-    Input,
-    FormControl,
-    FormLabel,
     Flex,
-    InputGroup,
-    InputRightElement
 } from '@chakra-ui/react'
 
 const ErrorPage: React.FC = () => {
