@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, Select } from "@chakra-ui/react";
+import axiosRequest from '../helpers/request'
 
 interface Client {
     AccountNumber: number;
@@ -25,7 +26,7 @@ const ClientsTable: React.FC<{ clients: Client[] }> = ({ clients }) => {
             setEditedClients(updatedClients);
 
             const { AccountNumber } = updatedClients[index];
-            await axios.post('/clients', { AccountNumber, Status: newStatus });
+            await axiosRequest('post', '/clients', { AccountNumber, Status: newStatus });
         } catch (error) {
             console.error('Ошибка при отправке запроса на обновление статуса:', error);
         }

@@ -19,10 +19,10 @@ const LoginPage: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const token = localStorage.getItem('token')
-            axios.defaults.headers.common['Authorization'] =`Bearer ${token}`;
+        const accessToken = localStorage.getItem('accessToken');
+        if (accessToken) {
+            const accessToken = localStorage.getItem('accessToken')
+            axios.defaults.headers.common['Authorization'] =`Bearer ${accessToken}`;
             navigate("/clients")
         } else {
             navigate("/")
@@ -36,9 +36,12 @@ const LoginPage: React.FC = () => {
                 password
             });
             const data = response.data;
-            localStorage.setItem('token', data.token);
+            localStorage.setItem('accessToken', data.accessToken);
+            localStorage.setItem('refreshToken', data.refreshToken);
             localStorage.setItem('user', data.FullName);
-            const token = localStorage.getItem('token')
+            localStorage.setItem('accessTokenExpiresAt', data.accessTokenExpiresAt);
+            localStorage.setItem('refreshTokenExpiresAt', data.refreshTokenExpiresAt);
+            const token = localStorage.getItem('accessToken')
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             return navigate("/clients")
         } catch (error) {

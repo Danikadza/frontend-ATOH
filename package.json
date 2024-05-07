@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/jsonwebtoken": "^9.0.6",
     "gh-pages": "^6.1.1"
   }
 }

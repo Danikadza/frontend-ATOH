@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { Button, Heading, Flex } from "@chakra-ui/react";
 import ClientsTable from '../../components/clientsTable';
+import axiosRequest from '../../helpers/request'
 
 interface Client {
     AccountNumber: number;
@@ -23,8 +24,8 @@ const ClientsPage: React.FC = () => {
 
     const getClients = async () => {
         try {
-            const response = await axios.get(`/clients?user=${user}`);
-            setClients(response.data);
+            const response = await axiosRequest('get', `/clients?user=${user}`);  
+            setClients(response);
         } catch (error) {
             console.error('Ошибка при отправке запроса:', error);
         }
@@ -40,9 +41,9 @@ const ClientsPage: React.FC = () => {
     }
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('accessToken');
         if (token) {
-            const token = localStorage.getItem('token')
+            const token = localStorage.getItem('accessToken')
             axios.defaults.headers.common['Authorization'] = `${token}`;
             fetchData()
         } else {
@@ -61,7 +62,7 @@ const ClientsPage: React.FC = () => {
                 <Heading as="h2" size="md">Пользователь: {user}</Heading>
                 <Button onClick={onExit} colorScheme="red">Выйти</Button>
             </Flex>
-            {clients.length > 0 ? (
+            {clients?.length > 0 ? (
                 <ClientsTable clients={clients} />
             ) : (
                 <p>Загрузка...</p>
